@@ -1,6 +1,8 @@
 # what-the-pack
 Ultra-fast MessagePack for NodeJS & Browsers.
 
+This fork allows parsing of broken/incomplete datasets. It makes some assumptions (ie about array/map length) that will probably not fit your use case, so please, do not use this.
+
 ## implementation notes
 
 - this implementation uses pre-allocated buffers and buffer.copy() for encoding, instead of regular arrays

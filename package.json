@@ -1,7 +1,7 @@
 {
   "name": "what-the-pack",
-  "version": "2.0.3",
-  "description": "Ultra-fast MessagePack for NodeJS & Browsers",
+  "version": "2.0.4",
+  "description": "Ultra-fast MessagePack for NodeJS & Browsers allowing parsing of incomplete datasets",
   "main": "index.js",
   "repository": "git@github.com:davalapar/what-the-pack.git",
   "author": "davalapar <davalapar@gmail.com>",
@@ -29,6 +29,13 @@
     "./index.js": "./browser.js"
   },
   "keywords": [
-    "message", "pack", "msg", "messagepack", "msgpack", "buffer", "compact", "small"
+    "message",
+    "pack",
+    "msg",
+    "messagepack",
+    "msgpack",
+    "buffer",
+    "compact",
+    "small"
   ]
 }

@@ -483,7 +483,7 @@ const initialize = (tempBufferLength, logFunction) => {
           tempDecodeBufferOffset += 1;
           return value;
         case 220: // array16
-          length = tempDecodeBuffer.readUInt16BE(tempDecodeBufferOffset += 1);
+          length = Math.min(tempDecodeBuffer.readUInt16BE(tempDecodeBufferOffset += 1), 1000);
           tempDecodeBufferOffset += 2;
           value = new Array(length);
           for (let i = 0; i < length; i += 1) {
@@ -491,7 +491,7 @@ const initialize = (tempBufferLength, logFunction) => {
           }
           return value;
         case 221: // array32
-          length = tempDecodeBuffer.readUInt32BE(tempDecodeBufferOffset += 1);
+          length = Math.min(tempDecodeBuffer.readUInt32BE(tempDecodeBufferOffset += 1), 1000);
           tempDecodeBufferOffset += 4;
           value = new Array(length);
           for (let i = 0; i < length; i += 1) {
@@ -499,7 +499,7 @@ const initialize = (tempBufferLength, logFunction) => {
           }
           return value;
         case 222: // map16
-          length = tempDecodeBuffer.readUInt16BE(tempDecodeBufferOffset += 1);
+          length = Math.min(tempDecodeBuffer.readUInt16BE(tempDecodeBufferOffset += 1), 1000);
           value = {};
           tempDecodeBufferOffset += 2;
           if (dictionaryEnabled === true) {
@@ -514,7 +514,7 @@ const initialize = (tempBufferLength, logFunction) => {
           }
           return value;
         case 223: // map32
-          length = tempDecodeBuffer.readUInt32BE(tempDecodeBufferOffset += 1);
+          length = Math.min(tempDecodeBuffer.readUInt32BE(tempDecodeBufferOffset += 1), 1000);
           value = {};
           tempDecodeBufferOffset += 4;
           if (dictionaryEnabled === true) {
@@ -529,25 +529,28 @@ const initialize = (tempBufferLength, logFunction) => {
           }
           return value;
         case 196: // bin8
-          length = tempDecodeBuffer.readUInt8(tempDecodeBufferOffset += 1);
+          length = Math.min(tempDecodeBuffer.readUInt8(tempDecodeBufferOffset += 1), 1000);
           tempDecodeBufferOffset += 1;
           value = tempDecodeBuffer.slice(tempDecodeBufferOffset, tempDecodeBufferOffset + length);
           tempDecodeBufferOffset += length;
           return value;
         case 197: // bin16
-          length = tempDecodeBuffer.readUInt16BE(tempDecodeBufferOffset += 1);
+          length = Math.min(tempDecodeBuffer.readUInt16BE(tempDecodeBufferOffset += 1), 1000);
           tempDecodeBufferOffset += 2;
           value = tempDecodeBuffer.slice(tempDecodeBufferOffset, tempDecodeBufferOffset + length);
           tempDecodeBufferOffset += length;
           return value;
         case 198: // bin32
-          length = tempDecodeBuffer.readUInt32BE(tempDecodeBufferOffset += 1);
+          length = Math.min(tempDecodeBuffer.readUInt32BE(tempDecodeBufferOffset += 1), 1000);
           tempDecodeBufferOffset += 4;
           value = tempDecodeBuffer.slice(tempDecodeBufferOffset, tempDecodeBufferOffset + length);
           tempDecodeBufferOffset += length;
           return value;
       }
-      throw Error('@internalDecode : Error decoding value.');
+
+      return null;
+
+      //throw Error('@internalDecode : Error decoding value.');
     }
   };
   const decode = (buffer) => {
